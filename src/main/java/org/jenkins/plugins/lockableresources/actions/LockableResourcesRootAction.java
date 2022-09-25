@@ -127,8 +127,8 @@ public class LockableResourcesRootAction implements RootAction {
     String name = req.getParameter("resource");
     LockableResource r = LockableResourcesManager.get().fromName(name);
     if (r == null) {
-      rsp.sendError(404, "Resource not found " + name);
-      return;
+        rsp.sendError(404, "Resource not found " + name);
+        return;
     }
 
     List<LockableResource> resources = new ArrayList<>();
@@ -145,10 +145,15 @@ public class LockableResourcesRootAction implements RootAction {
     Jenkins.get().checkPermission(RESERVE);
 
     String name = req.getParameter("resource");
+    String block = req.getParameter("block");
     LockableResource r = LockableResourcesManager.get().fromName(name);
     if (r == null) {
-      rsp.sendError(404, "Resource not found " + name);
-      return;
+      if(!LockableResourcesManager.get().createResource(name)) {
+        rsp.sendError(404, "createResource failed " + name);
+        return;
+      } else {
+        r = LockableResourcesManager.get().fromName(name);
+      }
     }
 
     List<LockableResource> resources = new ArrayList<>();

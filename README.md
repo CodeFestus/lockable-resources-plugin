@@ -139,7 +139,7 @@ If you have the proper environment, typing:
 
 should create a plugin as `target/*.hpi`, which you can install in your Jenkins instance. Running
 
-    $ mvn hpi:run -Djenkins.version=2.249.1
+    $ mvn hpi:run -Djenkins.version=2.289.3
 
 allows you to spin up a test Jenkins instance on [localhost] to test your
 local changes before committing.
